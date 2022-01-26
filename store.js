@@ -3,8 +3,8 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import headerStore from './headerStore';
-import sidebarStore from './sidebarStore';
+import headerStore from '@/store/headerStore';
+import sidebarStore from '@/store/sidebarStore';
 
 // Object Dynamic property: mutations의 함수 이름을 변수로 선언하여, 다른 파일에서 사용할 수 있게 함
 /*
