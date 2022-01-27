@@ -33,16 +33,15 @@ export const store = new Vuex.Store({
     * 화면을 로드했을 때, width
     * */
     curWidth(state) {
-      this.width = window.innerWidth;
-      if (state.width <= 1536) {
-        state.nav = false;
-      }
+      state.width = window.innerWidth;
+      state.nav = state.width > 1536;
     },
     /*
     * 화면 크기를 변경했을 때, width
     * */
     isMobile(state) {
       state.width = window.innerWidth;
+
       if (state.width <= 1024) { /* mobile */
         state.mobile = true;
         state.nav = false;
