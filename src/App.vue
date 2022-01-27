@@ -5,40 +5,22 @@
     <div class="layout">
       <!-- Sidebar -->
       <aside
-        v-show="sidebar"
-        :class="openSidebar"
+        v-show="nav"
         class="left-side"
       >
         <sidebar-menu />
       </aside>
 
-      <div class="flexbox">
+      <div
+        class="flexbox"
+        :class="{'open':nav}"
+      >
         <!-- Header -->
-        <div class="header-basis bg-gray-800">
-          <div class="header-basis-left" />
-          <div class="header">
-            <main-header />
-          </div>
-          <div class="header-basis-right" />
-        </div>
+        <main-header />
 
-        <div class="content-basis">
-          <div class="content-basis-left" />
-
-          <!-- Content -->
-          <div class="content">
-            <router-view />
-          </div>
-
-
-          <div class="content-basis-right" />
-        </div>
+        <!-- Content -->
+        <main-content />
       </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <main-footer />
     </div>
   </div>
 </template>
@@ -47,16 +29,16 @@
 
 import { mapState, mapMutations } from 'vuex';
 
-import MainHeader from "@/components/header/MainHeader";
-import MainFooter from "@/components/footer/MainFooter";
-import SidebarMenu from "@/components/sidebar/SidebarMenu";
+import SidebarMenu from "@/components/SidebarMenu";
+import MainHeader from "@/components/MainHeader";
+import Content from "@/components/Content";
 
 export default {
   name: 'App',
   components: {
+    'main-content': Content,
     'sidebar-menu': SidebarMenu,
     'main-header': MainHeader,
-    'main-footer': MainFooter,
   },
   data: () => {
     return {
@@ -64,27 +46,20 @@ export default {
     };
   },
   computed: {
-    ...mapState(['width', 'sidebar',]),
-    openSidebar() {
-      if (this.sidebar === true) {
-        return "display: block";
-      } else {
-        return "display: none";
-      }
-    }
+    ...mapState(['width', 'nav',]),
   },
   created() {
-    window.addEventListener('load', this.curView);
+    window.addEventListener('load', this.curWidth);
   },
   mounted() {
-    window.addEventListener('resize', this.mobileView);
+    window.addEventListener('resize', this.isMobile);
   },
   beforeDestroy() {
-    window.removeEventListener('load', this.curView);
-    window.removeEventListener('resize', this.mobileView);
+    window.removeEventListener('load', this.curWidth);
+    window.removeEventListener('resize', this.isMobile);
   },
   methods: {
-    ...mapMutations(["curView", "mobileView",]),
+    ...mapMutations(["curWidth", "isMobile",]),
   },
 }
 </script>
@@ -100,12 +75,10 @@ body {
 }
 
 #app {
-  /*width: 100%;*/
-  /*height: 100%;*/
-
   position: relative;
-  width: calc(100% - 20px);
-  height: calc(100vh - 20px);
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
 }
 
 .layout {
@@ -124,49 +97,16 @@ body {
 }
 
 .flexbox {
-  padding: 0 0;
-}
-
-.header-basis {
-  display: flex;
-  padding: 0 10px;
-}
-
-.content-basis {
-  padding: 10px;
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-
-.content {
-  padding: 15px 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 @media (max-width: 1536px) {
-  .content-basis-left,
-  .content-basis-right,
-  .header-basis-left,
-  .header-basis-right {
-    flex-basis: 2.5%;
+  .open {
+    transform: translateX(300px);
   }
-  .content,
-  .header {
-    flex-basis: 95%;
-  }
-}
-@media (min-width: 1536px) {
-  .content-basis-left,
-  .content-basis-right,
-  .header-basis-left,
-  .header-basis-right {
-    flex-basis: 7.5%;
-  }
-  .content,
-  .header {
-    flex-basis: 85%;
+  .flexbox {
+    position: absolute;
   }
 }
 </style>
