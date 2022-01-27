@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
     mobile: false,
 
     // sidebar
-    sidebar: true,
+    nav: true,
 
     // Table of contents
     tableOfContents: true,
@@ -32,36 +32,36 @@ export const store = new Vuex.Store({
     /*
     * 화면을 로드했을 때, width
     * */
-    curView(state) {
+    curWidth(state) {
       this.width = window.innerWidth;
       if (state.width <= 1536) {
-        state.sidebar = false;
+        state.nav = false;
       }
     },
     /*
     * 화면 크기를 변경했을 때, width
     * */
-    mobileView(state) {
+    isMobile(state) {
       state.width = window.innerWidth;
       if (state.width <= 1024) { /* mobile */
         state.mobile = true;
-        state.sidebar = false;
+        state.nav = false;
         state.tableOfContents = false;
       } else if (1024 < state.width && state.width <= 1536) {
         state.mobile = false;
-        state.sidebar = false;
+        state.nav = false;
         state.tableOfContents = true;
       } else {
         state.mobile = false;
-        state.sidebar = true;
+        state.nav = true;
         state.tableOfContents = true;
       }
     },
     /*
     * 사이드바 펼치기/접기
     * */
-    toggleSidebar(state) {
-      state.sidebar = !state.sidebar;
+    toggleNav(state) {
+      state.nav = !state.nav;
     }
   },
 });
