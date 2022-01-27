@@ -6,16 +6,6 @@ Vue.use(Vuex);
 import headerStore from '@/store/headerStore';
 import sidebarStore from '@/store/sidebarStore';
 
-// Object Dynamic property: mutations의 함수 이름을 변수로 선언하여, 다른 파일에서 사용할 수 있게 함
-/*
-* 여기에 작성
-* "export const 상수 = 값" 형태로 작성
-* */
-export const hHOME      = "Home";
-export const hBlOG      = "Blog";
-export const hPORTFOLIO = "Portfolio";
-export const hABOUT     = "About";
-
 export const store = new Vuex.Store({
   modules: {
     // 키: 값 형태로 저장
@@ -23,6 +13,55 @@ export const store = new Vuex.Store({
     sidebarStore,
   },
   state: {
+    // screen width
+    width: 0,
     mobile: false,
-  }
+
+    // sidebar
+    sidebar: true,
+
+    // Table of contents
+    tableOfContents: true,
+  },
+  getters: {
+    width_MD(state) {
+      return state.width < 768;
+    },
+  },
+  mutations: {
+    /*
+    * 화면을 로드했을 때, width
+    * */
+    curView(state) {
+      this.width = window.innerWidth;
+      if (state.width <= 1536) {
+        state.sidebar = false;
+      }
+    },
+    /*
+    * 화면 크기를 변경했을 때, width
+    * */
+    mobileView(state) {
+      state.width = window.innerWidth;
+      if (state.width <= 1024) { /* mobile */
+        state.mobile = true;
+        state.sidebar = false;
+        state.tableOfContents = false;
+      } else if (1024 < state.width && state.width <= 1536) {
+        state.mobile = false;
+        state.sidebar = false;
+        state.tableOfContents = true;
+      } else {
+        state.mobile = false;
+        state.sidebar = true;
+        state.tableOfContents = true;
+      }
+    },
+    /*
+    * 사이드바 펼치기/접기
+    * */
+    toggleSidebar(state) {
+      state.sidebar = !state.sidebar;
+    }
+  },
 });
