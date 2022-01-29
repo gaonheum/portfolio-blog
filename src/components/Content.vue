@@ -1,60 +1,56 @@
 <template>
   <div
-    id="content-app"
-    class="flex flex-grow-0 flex-shrink-0 w-full h-screen p-3"
+    id="content"
   >
-    <div class="content--left" />
-
-    <!-- Content -->
-    <div
-      id="content"
-      class="flex flex-col w-full h-screen"
-    >
-      <router-view />
-
-      <!-- Footer -->
+    <div class="flex flex-1 flex-col">
+      <main-header id="header" />
+      <router-view class="content bg-gray-300" />
       <main-footer />
     </div>
-
-    <div class="content--right" />
   </div>
 </template>
 
 <script>
+import MainHeader from "@/components/MainHeader";
 import MainFooter from "@/components/MainFooter";
 
 export default {
   name: "Content",
   components: {
+    'main-header': MainHeader,
     'main-footer': MainFooter,
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
-#content-app {
+#content {
   width: 100%;
-  height: 100vh;
 }
 
-@media (max-width: 1536px) {
-  .content--left,
-  .content--right {
-    flex-basis: 2.5%;
+.content {
+  height: 100vh;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
-  #content {
-    flex-basis: 95%;
+}
+@media (min-width: 1024px) and (max-width: 1536px) {
+  .content {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 }
 @media (min-width: 1536px) {
-  .content--left,
-  .content--right {
-    flex-basis: 7.5%;
-  }
-  #content {
-    flex-basis: 85%;
+  .content {
+    padding-left: 6rem;
+    padding-right: 9rem;
   }
 }
-
 </style>

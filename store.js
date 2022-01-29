@@ -24,17 +24,16 @@ export const store = new Vuex.Store({
     tableOfContents: true,
   },
   getters: {
-    width_MD(state) {
-      return state.width < 768;
-    },
+
   },
   mutations: {
     /*
     * 화면을 로드했을 때, width
+    * 현재 화면이 1280보다 클 경우, nav 고정
     * */
     curWidth(state) {
       state.width = window.innerWidth;
-      state.nav = state.width > 1536;
+      state.nav = state.width > 1280;
     },
     /*
     * 화면 크기를 변경했을 때, width
@@ -46,9 +45,13 @@ export const store = new Vuex.Store({
         state.mobile = true;
         state.nav = false;
         state.tableOfContents = false;
-      } else if (1024 < state.width && state.width <= 1536) {
+      } else if (1024 < state.width && state.width <= 1280) {
         state.mobile = false;
         state.nav = false;
+        state.tableOfContents = true;
+      } else if (1280 < state.width && state.width <= 1536) {
+        state.mobile = false;
+        state.nav = true;
         state.tableOfContents = true;
       } else {
         state.mobile = false;

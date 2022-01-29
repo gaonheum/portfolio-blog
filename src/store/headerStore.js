@@ -1,15 +1,7 @@
-
 const headerStore = {
   namespaced: true,
   state: {      // vue의 Data 기능
-    mainMenu: [
-      { title: "Home", to: '/' },
-      { title: "Blog", to: '/blog' },
-      { title: "Portfolios", to: '/portfolios' },
-      { title: "Tags", to: '/tags'  },
-      { title: "Archives", to: '/archives'  },
-      { title: "About", to: '/about'  },
-    ]
+
   },
   getters: {    // vue의 computed 기능
 

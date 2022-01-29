@@ -1,27 +1,13 @@
 <template>
   <div
     id="app"
+    class="flex"
   >
-    <div class="layout">
-      <!-- Sidebar -->
-      <aside
-        v-show="nav"
-        class="left-side"
-      >
-        <sidebar-menu />
-      </aside>
-
-      <div
-        class="flexbox"
-        :class="{'open':nav}"
-      >
-        <!-- Header -->
-        <main-header />
-
-        <!-- Content -->
-        <main-content />
-      </div>
-    </div>
+    <main-sidebar id="sidebar" />
+    <main-content
+      id="content"
+      :class="{ 'open': nav, 'close': !nav }"
+    />
   </div>
 </template>
 
@@ -29,16 +15,14 @@
 
 import { mapState, mapMutations } from 'vuex';
 
-import SidebarMenu from "@/components/SidebarMenu";
-import MainHeader from "@/components/MainHeader";
+import MainSidebar from "@/components/MainSidebar";
 import Content from "@/components/Content";
 
 export default {
   name: 'App',
   components: {
+    'main-sidebar': MainSidebar,
     'main-content': Content,
-    'sidebar-menu': SidebarMenu,
-    'main-header': MainHeader,
   },
   data: () => {
     return {
@@ -64,49 +48,38 @@ export default {
 }
 </script>
 
-<style>
-body {
-  background-color: gray;
+<style lang="scss">
 
-  width: 100%;
-  height: 100vh;
+body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100vh;
 }
 
 #app {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: scroll;
-}
-
-.layout {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: nowrap;
-  background-color: beige;
-}
-
-.left-side {
-  flex-basis: 300px;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-
-.flexbox {
-  width: 100%;
   height: 100vh;
 }
 
-@media (max-width: 1536px) {
+@media (max-width: 1280px) {
+  #content {
+    position: absolute;
+    height: 100vh;
+  }
   .open {
     transform: translateX(300px);
+    transition: 0.5s;
   }
-  .flexbox {
-    position: absolute;
+  .close {
+    transition: 0.5s;
   }
 }
+@media (min-width: 1280px) {
+  #content {
+    transform: translateX(300px);
+    width: calc(100% - 300px);
+    transition: 0.5s;
+  }
+}
+
 </style>
