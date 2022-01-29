@@ -1,23 +1,51 @@
+// export const SET_MENU = 'SET_MENU';
+// export const SET_PAGE = 'SET_PAGE';
 
 const sidebarStore = {
   namespaced: true,
-  state: {      // vue의 Data 기능
+  state: {
     mainMenu: [
-      { title: "Home", to: '/' },
-      { title: "Blog", to: '/blog' },
-      { title: "Portfolios", to: '/portfolios' },
-      { title: "Tags", to: '/tags'  },
-      { title: "Archives", to: '/archives'  },
-      { title: "About", to: '/about'  },
-    ]
-  },
-  getters: {    // vue의 computed 기능
+      { title: "Home", to: '/', icon: '' },
+      { title: "Blog", to: '/blog', icon: '' },
+      { title: "Portfolio", to: '/portfolio', icon: '' },
+      { title: "About", to: '/about', icon: ''  },
+    ],
+    blogTracking: [
+      { title: "Tag", to: '/tag', icon: ''  },
+      { title: "Archive", to: '/archive', icon: ''  },
+    ],
+    blogCategory: [
 
-  },
-  mutations: {  // state를 동기적으로 수정할 때 사용, state 수정 시, mutations를 통해 수정하는 것을 권장 -> 데이터를 추적할 수 있음
+    ],
 
+    curMenu: "Home",
+    curCategory: "",
+    curPage: "",
   },
-  actions: {    // 비동기를 사용할 때 또는, 여러 mutations를 연달아 실행할 때 사용
+  getters: {
+    MAIN_MENU: (state) => state.mainMenu,
+    BLOG_TRACKING: (state) => state.blogTracking,
+    BLOG_CATEGORY: (state) => state.blogCategory,
+
+    CUR_MENU: (state) => state.curMenu,
+    CUR_CATEGORY: (state) => state.curCategory,
+    CUR_PAGE: (state) => state.curPage,
+  },
+  mutations: {
+    SET_MENU: function (state, payload) {
+      state.curMenu = payload.title;
+      console.log(state.curMenu);
+    },
+    SET_CATEGORY: function (state, payload) {
+      state.curCategory = payload.title;
+      console.log(state.curCategory);
+    },
+    SET_PAGE: function (state, payload) {
+      state.curPage = payload.title;
+      console.log(state.curPage);
+    },
+  },
+  actions: {
 
   },
 }
