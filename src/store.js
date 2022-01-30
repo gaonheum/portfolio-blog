@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
     mobile: false,
 
     // sidebar
-    nav: true,
+    nav: false,
 
     // Table of contents
     tableOfContents: true,

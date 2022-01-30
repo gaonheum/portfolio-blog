@@ -1,6 +1,6 @@
 <template>
   <header
-    id="header"
+    id="header-main"
     class="flex flex-row justify-between py-4 px-2 text-white bg-gray-800"
   >
     <div class="flex">
@@ -26,7 +26,7 @@
       </div>
 
       <!-- 현재 위치 네비게이션 -->
-      <div>
+      <div class="text-gray-100">
         Header
       </div>
     </div>
@@ -85,7 +85,7 @@ export default {
     ...mapState(["width", "mobile"]),
 
     showNav() {
-      return this.width <= 1280;
+      return this.width < 1280;
     },
   },
   methods: {
@@ -96,7 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 
-#header {
+#header-main {
   position: sticky;
   top: 0;
 }
@@ -125,20 +125,20 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
-  #header {
+@media (max-width: 1280px) {
+  #header-main {
     padding-left: 2rem;
     padding-right: 2rem;
   }
 }
-@media (min-width: 1024px) and (max-width: 1536px) {
-  #header {
+@media (min-width: 1280px) and (max-width: 1536px) {
+  #header-main {
     padding-left: 3rem;
     padding-right: 3rem;
   }
 }
 @media (min-width: 1536px) {
-  #header {
+  #header-main {
     padding-left: 6rem;
     padding-right: 9rem;
   }

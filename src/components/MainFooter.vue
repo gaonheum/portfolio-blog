@@ -1,6 +1,6 @@
 <template>
   <footer
-    id="footer"
+    id="footer-main"
     class="flex flex-col md:flex-row justify-center md:justify-between
            px-4 py-4 text-gray-100 bg-gray-800"
   >

@@ -1,5 +1,5 @@
 <template>
-  <div id="about">
+  <div>
     About <br>
   </div>
 </template>
@@ -11,7 +11,5 @@ export default {
 </script>
 
 <style scoped>
-#blog {
-  height: 100vh;
-}
+
 </style>

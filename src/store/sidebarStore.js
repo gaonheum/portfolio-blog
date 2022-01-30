@@ -4,22 +4,30 @@
 const sidebarStore = {
   namespaced: true,
   state: {
+    login: false,
+
     mainMenu: [
-      { title: "Home", to: '/', icon: '' },
-      { title: "Blog", to: '/blog', icon: '' },
-      { title: "Portfolio", to: '/portfolio', icon: '' },
-      { title: "About", to: '/about', icon: ''  },
+      { title: "Home", to: '/' },
+      { title: "Blog", to: '/blog' },
+      { title: "Portfolio", to: '/portfolio' },
+      { title: "About", to: '/about' },
     ],
     blogTracking: [
       { title: "Tag", to: '/tag', icon: ''  },
       { title: "Archive", to: '/archive', icon: ''  },
     ],
     blogCategory: [
-
+      {title: 'Item 1'},
+      {title: 'Item 2'},
+      {title: 'Item 3', children: [
+        {title: 'Item 3.1'},
+        {title: 'Item 3.2'},
+      ]}
     ],
 
     curMenu: "Home",
     curCategory: "",
+    curSubCategory: "",
     curPage: "",
   },
   getters: {
@@ -29,6 +37,7 @@ const sidebarStore = {
 
     CUR_MENU: (state) => state.curMenu,
     CUR_CATEGORY: (state) => state.curCategory,
+    CUR_SUB_CATEGORY: (state) => state.curSubCategory,
     CUR_PAGE: (state) => state.curPage,
   },
   mutations: {
